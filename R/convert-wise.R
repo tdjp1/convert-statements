@@ -47,13 +47,9 @@ convert_wise <- function(file, outfile = NULL, overwrite = TRUE) {
     output$Description[added] <- "Money added"
     
     # Fix transfer payments
-    payee <- input$Payee.Name != ""
-    output$Description[payee] <- paste(input$Payee.Name, input$Payment.Reference)[payee]
+    payee <- !is.na(input$Payee.Name) & input$Payee.Name != ""
+    output$Description[payee] <- paste(input$Payee.Name[payee], input$Payment.Reference)[payee]
     
-    # Fix transfer payments
-    payee <- input$Payee.Name != ""
-    output$Description[payee] <- paste(input$Payee.Name, input$Payment.Reference)[payee]
-
     # Deal with cashback
     accrual <- grepl(
         "^ACCRUAL|^BALANCE_CASHBACK",
