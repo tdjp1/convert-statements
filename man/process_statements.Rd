@@ -4,10 +4,12 @@
 \alias{process_statements}
 \title{Convert bank statements in specified directory}
 \usage{
-process_statements(path = ".")
+process_statements(path = ".", window = 90)
 }
 \arguments{
-\item{path}{character str4ing containg directory to process}
+\item{path}{character string containg directory to process}
+
+\item{window}{integer containing maximum age of transactions to import}
 }
 \description{
 Convert bank statements in specified directory

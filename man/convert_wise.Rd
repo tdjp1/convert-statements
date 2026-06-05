@@ -4,7 +4,7 @@
 \alias{convert_wise}
 \title{Convert a Wise statement to a CSV file suitable for import into GnuCash}
 \usage{
-convert_wise(file, outfile = NULL, overwrite = TRUE)
+convert_wise(file, outfile = NULL, overwrite = TRUE, window)
 }
 \arguments{
 \item{file}{Character variable containing input file name (CSV file)}
@@ -14,6 +14,8 @@ create a sensible name in the same directory as the input file}
 
 \item{overwrite}{logical variable to control whether an existing output file
 of the same name will be overwritten}
+
+\item{window}{integer containing maximum age of transactions to import}
 }
 \description{
 You need to export a statement from the WISE website (and not download transactions).

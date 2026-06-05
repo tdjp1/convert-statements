@@ -1,12 +1,13 @@
 #' Convert bank statements in specified directory
 #'
-#' @param path character str4ing containg directory to process
+#' @param path character string containg directory to process
+#' @param window integer containing maximum age of transactions to import
 #' 
 #' @export
 #' @examples
 #' process_statements()
 
-process_statements <- function(path= ".") {
+process_statements <- function(path= ".", window = 90) {
     # Just find qfx, csv and xlsx files
     files <- list.files(path = path, full.names = TRUE, pattern = "\\.qfx|.csv|.xlsx")
     
@@ -28,7 +29,7 @@ process_statements <- function(path= ".") {
     # Process each file
     for (i in 1:nrow(df)) {
         message("Processing ", df$Full[i], " with ", df$Function[i], "...")
-        do.call(df$Function[i], list(file = df$Full[i]))
+        do.call(df$Function[i], list(file = df$Full[i]), window = window)
     }
 
 }

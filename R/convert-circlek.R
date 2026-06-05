@@ -1,7 +1,3 @@
-# Convert Circle K file
-# Tim Perkins
-# 28 May 2026
-
 #' Convert Circle K Excel transaction file info CSV for GnuCash
 #' 
 #' This extracts relevant columns and writes CSV file
@@ -11,12 +7,14 @@
 #' create a sensible name in the same directory as the input file
 #' @param overwrite logical variable to control whether an existing output file
 #' of the same name will be overwritten
+#' @param window integer containing maximum age of transactions to import
 #'
+#' @author Tim Perkins
 #' @export
 #' @examples
 #' convert_circlek("~/Desktop/transactions.xlsx")
 
-convert_circlek <- function(file, outfile = NULL, overwrite = TRUE) {
+convert_circlek <- function(file, outfile = NULL, overwrite = TRUE, window) {
     if (!file.exists(file)) {
         stop(
             "Required input Circle K transactions file ",
@@ -58,7 +56,10 @@ convert_circlek <- function(file, outfile = NULL, overwrite = TRUE) {
     
     # Sort by date order
     output <- output[order(output$Date),]
-    
+
+    # Apply transaction window
+    if (!missing(window)) output <- apply_window(output, window)
+
     # Default output filename in same directory as input file
     # and has format CircleK-{YYYYMMDD}.csv
     if (is.null(outfile)) {

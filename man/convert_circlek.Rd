@@ -4,7 +4,7 @@
 \alias{convert_circlek}
 \title{Convert Circle K Excel transaction file info CSV for GnuCash}
 \usage{
-convert_circlek(file, outfile = NULL, overwrite = TRUE)
+convert_circlek(file, outfile = NULL, overwrite = TRUE, window)
 }
 \arguments{
 \item{file}{Character variable containing input file name (XLSXfile)}
@@ -14,10 +14,15 @@ create a sensible name in the same directory as the input file}
 
 \item{overwrite}{logical variable to control whether an existing output file
 of the same name will be overwritten}
+
+\item{window}{integer containing maximum age of transactions to import}
 }
 \description{
 This extracts relevant columns and writes CSV file
 }
 \examples{
 convert_circlek("~/Desktop/transactions.xlsx")
+}
+\author{
+Tim Perkins
 }

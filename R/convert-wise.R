@@ -11,12 +11,13 @@
 #' create a sensible name in the same directory as the input file
 #' @param overwrite logical variable to control whether an existing output file
 #' of the same name will be overwritten
+#' @param window integer containing maximum age of transactions to import
 #'
 #' @examples
 #' convert_wise("~/Desktop/statement_15924_SEK_2026-01-01_2026-05-29.csv", overwrite = FALSE)
 #' convert_wise("~/Desktop/statement_15924_SEK_2026-01-01_2026-05-29.csv", outfile = "TMP.csv")
 
-convert_wise <- function(file, outfile = NULL, overwrite = TRUE) {
+convert_wise <- function(file, outfile = NULL, overwrite = TRUE, window) {
     if (!file.exists(file)) {
         stop(
             "Required input WISE transactions file ",
@@ -29,6 +30,9 @@ convert_wise <- function(file, outfile = NULL, overwrite = TRUE) {
     if(names(input)[1] != "TransferWise.ID") {
         stop("Input file ", file, " seems to be in the wrong format for WISE")
     }
+
+    # Apply transaction window
+    if (!missing(window)) output <- apply_window(output, window)
 
     # Date in correct order
     output <- data.frame(

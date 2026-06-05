@@ -4,7 +4,7 @@
 \alias{convert_norwegian}
 \title{Convert Bank Norwegian Excel transaction file to CSV}
 \usage{
-convert_norwegian(file, outfile = NULL, overwrite = TRUE)
+convert_norwegian(file, outfile = NULL, overwrite = TRUE, window)
 }
 \arguments{
 \item{file}{xlsx format input file to process}
@@ -14,8 +14,13 @@ create a sensible name in the same directory as the input file}
 
 \item{overwrite}{logical variable to control whether an existing output file
 of the same name will be overwritten}
+
+\item{window}{integer containing maximum age of transactions to import}
 }
 \description{
 This creates an output with same same and directory as input file but
 with CSV extension and overwrites any existing file of the same name
+}
+\examples{
+convert_norwegian("~/Desktop/Statements.xlsx", window = 30)
 }

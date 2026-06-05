@@ -12,10 +12,13 @@
 #' create a sensible name in the same directory as the input file
 #' @param overwrite logical variable to control whether an existing output file
 #' of the same name will be overwritten
+#' @param window integer containing maximum age of transactions to import
 #'
 #' @export
 #' @examples
-convert_norwegian <- function(file, outfile = NULL, overwrite = TRUE) {
+#' convert_norwegian("~/Desktop/Statements.xlsx", window = 30)
+
+convert_norwegian <- function(file, outfile = NULL, overwrite = TRUE, window) {
     library(readxl)
     if (!file.exists(file)) {
         stop(
@@ -45,6 +48,10 @@ convert_norwegian <- function(file, outfile = NULL, overwrite = TRUE) {
     # Update memo for payments
     payments <- input$Type == "Betalning"
     output$Memo[payments] <- "Betalning"
+    
+
+    # Apply transaction window
+    if (!missing(window)) output <- apply_window(output, window)
 
     # Output file name
     # Default output filename in same directory as input file

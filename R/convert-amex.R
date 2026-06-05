@@ -9,13 +9,14 @@
 #' create a sensible name in the same directory as the input file
 #' @param overwrite logical variable to control whether an existing output file
 #' of the same name will be overwritten
+#' @param window arugument for compatibility only - is ignore
 #'
 #' @export
 #' @examples 
 #' convert_amex("~/Desktop/activity.qfx")
 #' convert_amex("activity.qfx", outfile = "NEW.qfx", overwrite = FALSE)
 #' 
-convert_amex <- function(file, outfile = NULL, overwrite = TRUE) {
+convert_amex <- function(file, outfile = NULL, overwrite = TRUE, window) {
     if (!file.exists(file)) {
         stop(
             "Required input AmEx transactions file ",
