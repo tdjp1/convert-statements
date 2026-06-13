@@ -29,7 +29,7 @@ process_statements <- function(path= ".", window = 90) {
     # Process each file
     for (i in 1:nrow(df)) {
         message("Processing ", df$Full[i], " with ", df$Function[i], "...")
-        do.call(df$Function[i], list(file = df$Full[i]), window = window)
+        do.call(df$Function[i], list(file = df$Full[i], window = window))
     }
 
 }

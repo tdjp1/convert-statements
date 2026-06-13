@@ -32,7 +32,7 @@ convert_wise <- function(file, outfile = NULL, overwrite = TRUE, window) {
     }
 
     # Apply transaction window
-    if (!missing(window)) output <- apply_window(output, window)
+    if (!missing(window)) output <- apply_window(input, window)
 
     # Date in correct order
     output <- data.frame(
