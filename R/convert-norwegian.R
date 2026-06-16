@@ -33,9 +33,6 @@ convert_norwegian <- function(file, outfile = NULL, overwrite = TRUE, window) {
     if (names(input)[1] != "TransactionDate") {
         stop("Input file ", file, " seems to be in the wrong format for Norwegian")
     }
-    
-    # Skip just reserved transactions
-    input <- input[input$Type != "Reserverat",]
 
     # Create the essential outputs from input
     output <- data.frame(
@@ -44,6 +41,10 @@ convert_norwegian <- function(file, outfile = NULL, overwrite = TRUE, window) {
         Description = input$Text,
         Memo = paste(input$`Merchant Category`, input$`Merchant Area`)
     )
+    
+    # Update memo for reserved transactions
+    reserved <- input$Type == "Reserverat"
+    output$Memo[reserved] <- "Reserved"
     
     # Update memo for payments
     payments <- input$Type == "Betalning"
