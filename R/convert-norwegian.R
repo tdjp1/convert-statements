@@ -33,6 +33,8 @@ convert_norwegian <- function(file, outfile = NULL, overwrite = TRUE, window) {
     if (names(input)[1] != "TransactionDate") {
         stop("Input file ", file, " seems to be in the wrong format for Norwegian")
     }
+    
+    id <- sub(".*(20[0-9][-0-9]+).xlsx", "\\1", file)
 
     # Create the essential outputs from input
     output <- data.frame(
@@ -62,6 +64,8 @@ convert_norwegian <- function(file, outfile = NULL, overwrite = TRUE, window) {
             dirname(file),
             paste0(
                 "Bank-Norwegian-",
+                id,
+                "-",
                 format(Sys.Date(), "%Y%m%d"),
                 ".csv"
             )
