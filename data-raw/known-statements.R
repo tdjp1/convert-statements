@@ -2,7 +2,8 @@ known_statements <- read.table(header = TRUE, sep = ",", text ="
 Pattern,Function
 ^activity,convert_amex
 ^Statement.xlsx,convert_norwegian
-^statement_[0-9]+,convert_wise
+^kontoutdrag-[0-9-]+,convert_norwegian
+^statement_[0-9]+.*csv$,convert_wise
 ^transactions-20[0-9]+,convert_circlek
 ")
 

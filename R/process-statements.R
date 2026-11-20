@@ -11,7 +11,7 @@ process_statements <- function(path= ".", window = 90) {
     # Just find qfx, csv and xlsx files
     files <- list.files(path = path, full.names = TRUE, pattern = "\\.qfx|.csv|.xlsx")
     
-    # Check we git some files
+    # Check we got some files
     if (length(files) == 0) {
         warning("No statement files found in directory ", path)
         return()

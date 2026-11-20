@@ -30,9 +30,13 @@ convert_wise <- function(file, outfile = NULL, overwrite = TRUE, window) {
     if(names(input)[1] != "TransferWise.ID") {
         stop("Input file ", file, " seems to be in the wrong format for WISE")
     }
-
-    # Apply transaction window
-    if (!missing(window)) output <- apply_window(input, window)
+    
+    if(nrow(input[1]) == 0) {
+        message("No transactions found in ", file, " - no file output")
+        return()
+    }
+    
+    id <- sub("^.*_([0-9]+)_.*$", "\\1", file)
 
     # Date in correct order
     output <- data.frame(
@@ -78,13 +82,20 @@ convert_wise <- function(file, outfile = NULL, overwrite = TRUE, window) {
         )
     )
 
+    # Apply transaction window
+    if (!missing(window)) {
+        output <- apply_window(output, window)
+    }
+
     # Default output filename in same directory as input file
-    # and has format WISE-{CUR}-{YYYYMMDD}.csv
+    # and has format WISE-{ID}-{CUR}-{YYYYMMDD}.csv
     if (is.null(outfile)) {
         outfile <- file.path(
             dirname(file),
             paste0(
                 "WISE-",
+                id,
+                "-",
                 names(which.max(table(input$Currency))),
                 "-",
                 format(Sys.Date(), "%Y%m%d"),

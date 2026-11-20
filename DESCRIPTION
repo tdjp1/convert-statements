@@ -1,6 +1,6 @@
 Package: ConvertStatements
 Title: Converts bank statements in files into format suitable for GnuCash
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(
     person(given = "Tim",
            family = "Perkins",
@@ -14,9 +14,9 @@ Description: Functions typically read a bank statement exported from a website
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 8.0.0
 Imports:
     readxl
 Depends:
     R (>= 4.1.0)
 LazyData: true
+Config/roxygen2/version: 8.1.1

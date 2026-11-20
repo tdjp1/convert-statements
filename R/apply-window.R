@@ -13,14 +13,12 @@
 
 apply_window <- function (input, window) {
     # Deal with transaction window
-    output <- input
-    oldest <- min(output$Date)
+    oldest <- min(input$Date)
     window <- as.integer(window)
     limit <- Sys.Date() - window
     if (limit >= oldest) {
-        output <- output[output$Date >= limit,]
+        input <- input[input$Date >= limit,]
         message("Ignoring transactions older than ", limit)
     }
-
-    return(output)
+    input
 }
